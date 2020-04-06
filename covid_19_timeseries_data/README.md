@@ -1,9 +1,13 @@
-[Upcoming changes in time series tables (3/22)](https://github.com/CSSEGISandData/COVID-19/issues/1250)
+# Dataset
 
-Note: some records may look incomplete or inconsistent with previous days due to the modification from the data source.
+The data source can be accessed from the JHU CSSE's github repository with the link shared below.
 
-<b>---DEPRICATED WARNING---</b><br>
-The files below will no longer be updated. With the release of the new data structure, we are updating our time series tables to reflect these changes. Please reference time_series_covid19_confirmed_global.csv and time_series_covid19_deaths_global.csv for the latest time series data. <br><br>
-time_series_19-covid-Confirmed.csv	<br>
-time_series_19-covid-Deaths.csv	<br>
-time_series_19-covid-Recovered.csv
+https://github.com/CSSEGISandData/COVID-19
+ 
+ The files used in the dashboard are:
+ * time_series_covid19_confirmed_global.csv for confirmed cases
+ * time_series_covid19_deaths_global.csv for global deaths
+ * time_series_covid19_recovered_global.csv for global deaths
+ 
+ All the files contain data in a wide format with an allocated column for each date per country. Hence, data shaping is done using Tableau Prep Builder to tranfrom the data into a long format. The entire process is explained in depth in the Tableau files folder. 
+ 
