@@ -1,0 +1,2816 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20201.20.0219.0753                               -->
+<workbook source-build='2020.1.0 (20201.20.0219.0753)' source-platform='mac' version='18.1' xml:base='https://public.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AutoCreateAndUpdateDSDPhoneLayouts />
+    <MapboxVectorStylesAndLayers />
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+    <WorksheetBackgroundTransparency />
+    <ZoneBackgroundTransparency />
+  </document-format-change-manifest>
+  <repository-location id='Covid19DashboardbyShashankSharma' path='/workbooks' revision='1.7' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
+      <aliases enabled='yes' />
+      <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
+        <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+        <members>
+          <member value='&quot;Confirmed Cases&quot;' />
+          <member value='&quot;Recovered&quot;' />
+          <member value='&quot;Deaths&quot;' />
+          <member value='&quot;Active Cases&quot;' />
+        </members>
+      </column>
+    </datasource>
+    <datasource caption='Output Extract' inline='true' name='federated.04gsorz04qptme12pdqk30ccpx1u' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Output' name='hyper.0ahjej90ow9itd16j1an81r6vmp2'>
+            <connection authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/shashanksharma/Documents/github/COVID-19/Tableau files/Output.hyper' default-settings='yes' port='0' sslmode='' username='tableau_internal_user' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='hyper.0ahjej90ow9itd16j1an81r6vmp2' name='Extract' table='[Extract].[Extract]' type='table'>
+          <columns>
+            <column datatype='date' date-parse-format='MM/dd/yy' name='Date' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>Recovered</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Recovered]</local-name>
+            <parent-name>[Extract]</parent-name>
+            <remote-alias>Recovered</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <approx-count>138</approx-count>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Deaths</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Deaths]</local-name>
+            <parent-name>[Extract]</parent-name>
+            <remote-alias>Deaths</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <approx-count>145</approx-count>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[Date]</local-name>
+            <parent-name>[Extract]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Confirmed Cases</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Confirmed Cases]</local-name>
+            <parent-name>[Extract]</parent-name>
+            <remote-alias>Confirmed Cases</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <approx-count>596</approx-count>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Country/Region</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Country/Region]</local-name>
+            <parent-name>[Extract]</parent-name>
+            <remote-alias>Country/Region</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>184</approx-count>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Selection' datatype='integer' name='[Calculation_3138938605909622785]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='if [Parameters].[Parameter 1] = &quot;Deaths&quot; then&#10;   Sum([Deaths])&#10;    &#10;elseif [Parameters].[Parameter 1] = &quot;Confirmed Cases&quot; then&#10;    Sum([Confirmed Cases])&#10;&#10;elseif [Parameters].[Parameter 1] = &quot;Recovered&quot; then&#10;    Sum([Recovered])&#10;&#10;elseif [Parameters].[Parameter 1] = &quot;Active Cases&quot; then&#10;    Sum([Calculation_3138938605913772035])&#10;&#10;end' />
+      </column>
+      <column caption='Max_date' datatype='boolean' name='[Calculation_3138938605910118402]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='[Date] =  {FIXED : MAX([Date])}' />
+      </column>
+      <column caption='Active cases' datatype='integer' name='[Calculation_3138938605913772035]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[Confirmed Cases] - [Deaths]- [Recovered]' />
+      </column>
+      <column caption='Positive change others' datatype='string' name='[Calculation_3138938605947031556]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='if (ZN([Calculation_3138938605909622785]) - LOOKUP(ZN([Calculation_3138938605909622785]), -1))&gt; 0 AND ([Parameters].[Parameter 1] != &apos;Recovered&apos;)  then &quot;▲&quot; end'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Negative change others' datatype='string' name='[Calculation_3138938605947359238]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='if (ZN([Calculation_3138938605909622785]) - LOOKUP(ZN([Calculation_3138938605909622785]), -1) &lt; 0) AND ([Parameters].[Parameter 1] != &apos;Recovered&apos;) then &quot;▼&quot; end'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Last_date' datatype='date' name='[Calculation_3138938606087462923]' role='dimension' type='ordinal'>
+        <calculation class='tableau' formula='{FIXED : MAX([Date])}' />
+      </column>
+      <column datatype='integer' name='[Confirmed Cases]' role='measure' type='quantitative' />
+      <column datatype='string' name='[Country/Region]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column datatype='date' datatype-customized='true' name='[Date]' role='dimension' type='ordinal' />
+      <column datatype='integer' name='[Deaths]' role='measure' type='quantitative' />
+      <column caption='Negative change recovered' datatype='string' name='[Negative change others (copy)_3138938605952479239]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='if ((ZN([Calculation_3138938605909622785]) - LOOKUP(ZN([Calculation_3138938605909622785]), -1) &lt; 0) AND ([Parameters].[Parameter 1] = &apos;Recovered&apos;)) then &quot;▼&quot; end'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Positive change recovered' datatype='string' name='[Positive change others (copy)_3138938605952610312]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='if (ZN([Calculation_3138938605909622785]) - LOOKUP(ZN([Calculation_3138938605909622785]), -1))&gt; 0 AND ([Parameters].[Parameter 1] = &apos;Recovered&apos;)  then &quot;▲&quot; end'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column datatype='integer' name='[Recovered]' role='measure' type='quantitative' />
+      <column-instance column='[Calculation_3138938605909622785]' derivation='User' name='[diff:usr:Calculation_3138938605909622785:ok:2]' pivot='key' type='ordinal'>
+        <table-calc diff-options='Relative' ordering-field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Country/Region]' ordering-type='Field' type='Difference'>
+          <address>
+            <value>-1</value>
+          </address>
+        </table-calc>
+      </column-instance>
+      <column-instance column='[Calculation_3138938605909622785]' derivation='None' name='[none:Calculation_3138938605909622785:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_3138938606087462923]' derivation='None' name='[none:Calculation_3138938606087462923:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Country/Region]' derivation='None' name='[none:Country/Region:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Confirmed Cases]' derivation='Sum' name='[sum:Confirmed Cases:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Deaths]' derivation='Sum' name='[sum:Deaths:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Recovered]' derivation='Sum' name='[sum:Recovered:qk]' pivot='key' type='quantitative' />
+      <group caption='Action (Country/Region)' hidden='true' name='[Action (Country/Region)]' name-style='unqualified' user:auto-column='sheet_link'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[Country/Region]' />
+        </groupfilter>
+      </group>
+      <group caption='Action (Last_date,Country/Region)' hidden='true' name='[Action (Last_date,Country/Region)]' name-style='unqualified' user:auto-column='sheet_link'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[Calculation_3138938606087462923]' />
+          <groupfilter function='level-members' level='[Country/Region]' />
+        </groupfilter>
+      </group>
+      <group hidden='true' name='[Exclusions (Country/Region,Last_date)]' name-style='unqualified' user:auto-column='exclude'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[none:Country/Region:nk]' />
+          <groupfilter function='level-members' level='[none:Calculation_3138938606087462923:qk]' />
+        </groupfilter>
+      </group>
+      <group hidden='true' name='[Exclusions (Country/Region,Selection)]' name-style='unqualified' user:auto-column='exclude'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[none:Country/Region:nk]' />
+          <groupfilter function='level-members' level='[none:Calculation_3138938605909622785:qk]' />
+        </groupfilter>
+      </group>
+      <layout dim-ordering='alphabetic' dim-percentage='0.3125' measure-ordering='alphabetic' measure-percentage='0.435897' parameter-percentage='0.251603' rowDisplayCount='70000' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[:Measure Names]' type='palette'>
+            <map to='#59a14f'>
+              <bucket>&quot;[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Recovered:qk]&quot;</bucket>
+            </map>
+            <map to='#ae123a'>
+              <bucket>&quot;[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Confirmed Cases:qk]&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:Country/Region:nk]' type='palette'>
+            <map to='#499894'>
+              <bucket>&quot;Argentina&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;Cambodia&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;Dominican Republic&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;Guinea&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;Korea, South&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;Moldova&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;Paraguay&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;Somalia&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;United Kingdom&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Afghanistan&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Bolivia&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Croatia&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Gabon&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Ireland&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Madagascar&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Niger&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;San Marino&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;Timor-Leste&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Bulgaria&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Denmark&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Ghana&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Italy&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Japan&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Malta&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Oman&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Seychelles&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Turkey&quot;</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>&quot;US&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Azerbaijan&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Chad&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Equatorial Guinea&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Holy See&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Laos&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Morocco&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Portugal&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Sudan&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;Venezuela&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Armenia&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Cameroon&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Ecuador&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Guinea-Bissau&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Kosovo&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Monaco&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Peru&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;South Africa&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;Uruguay&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Andorra&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Burkina Faso&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Diamond Princess&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Greece&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Jordan&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Mauritania&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Pakistan&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Singapore&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;Uganda&quot;</bucket>
+            </map>
+            <map to='#9c755f'>
+              <bucket>&quot;Spain&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;Benin&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;Costa Rica&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;Finland&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;Iran&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;Lithuania&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;New Zealand&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;Saint Lucia&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Bosnia and Herzegovina&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Cuba&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Gambia&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Israel&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Malaysia&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Nigeria&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Saudi Arabia&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Togo&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Australia&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Belgium&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Congo (Brazzaville)&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Ethiopia&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Libya&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Nepal&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Rwanda&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Syria&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Zimbabwe&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Angola&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Burma&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Djibouti&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Grenada&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Kazakhstan&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Mauritius&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Panama&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Slovakia&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;Ukraine&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Bahamas&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Chile&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Eritrea&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Honduras&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Latvia&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Mozambique&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Qatar&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Suriname&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Vietnam&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;Bahrain&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;Barbados&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;Estonia&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;Hungary&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;Lebanon&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;MS Zaandam&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;Romania&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;Sweden&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;West Bank and Gaza&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;Belize&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;Congo (Kinshasa)&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;Fiji&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;Indonesia&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;Netherlands&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;Saint Kitts and Nevis&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;Taiwan*&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;Bhutan&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;Cote d&apos;Ivoire&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;France&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;Iraq&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;Luxembourg&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;Nicaragua&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;Saint Vincent and the Grenadines&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;Thailand&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Canada&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;China&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Egypt&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Guyana&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Kuwait&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Mongolia&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Philippines&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Tanzania&quot;</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>&quot;India&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Antigua and Barbuda&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Cabo Verde&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Dominica&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Guatemala&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Kenya&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Mexico&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Papua New Guinea&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;Slovenia&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;United Arab Emirates&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Albania&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Brazil&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Cyprus&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Georgia&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Liechtenstein&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Maldives&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;North Macedonia&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Senegal&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Trinidad and Tobago&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Bangladesh&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Belarus&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Colombia&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Eswatini&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Liberia&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Namibia&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Russia&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Switzerland&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;Zambia&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Austria&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Central African Republic&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;El Salvador&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Haiti&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Kyrgyzstan&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Montenegro&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Poland&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Sri Lanka&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;Uzbekistan&quot;</bucket>
+            </map>
+            <map to='#ff9da7'>
+              <bucket>&quot;Germany&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Algeria&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Brunei&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Czechia&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Iceland&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Jamaica&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Mali&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Norway&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Serbia&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;Tunisia&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[diff:usr:Calculation_3138938605909622785:ok:2]' type='palette'>
+            <map to='#499894'>
+              <bucket>-17038</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>-785</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>-194</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>-8</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>9</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>61</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>74</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>174</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>343</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>712</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>920</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>1831</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>5485</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>35408</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>%null%</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>-1805</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>-428</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>-58</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>1</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>34</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>110</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>144</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>274</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>563</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>590</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>1203</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>2294</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>5576</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>88853</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>-73122</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>-1244</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>-283</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>-22</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>5</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>56</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>130</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>204</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>295</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>659</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>683</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>1495</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>3532</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>9478</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>-9132</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>-651</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>-177</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>-3</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>14</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>79</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>91</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>207</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>318</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>407</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>802</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>1184</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>2415</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>9814</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>81999</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>-14071</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>-709</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>-190</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>-7</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>10</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>68</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>84</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>179</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>356</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>717</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>979</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>1909</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>7124</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>38105</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>-57554</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>-1204</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>-269</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>-21</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>58</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>141</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>211</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>305</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>671</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>708</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>1638</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>3646</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>9819</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>-3784</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>-486</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>-76</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>28</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>49</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>102</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>112</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>246</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>506</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>529</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>1167</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>1906</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>4015</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>72048</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>-121374</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>-1654</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>-409</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>-50</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>2</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>38</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>113</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>257</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>278</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>608</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>615</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>1245</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>2452</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>7402</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>121204</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>-4580</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>-538</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>-124</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>24</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>25</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>97</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>99</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>235</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>404</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>468</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>1075</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>1437</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>3640</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>36938</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>-38098</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>-1073</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>-265</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>-18</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>7</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>55</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>60</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>149</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>308</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>684</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>794</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>1693</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>3774</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>14076</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>-8089</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>-636</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>-172</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>-2</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>16</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>87</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>94</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>224</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>326</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>412</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>963</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>1204</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>2631</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>10629</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>92472</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>-7372</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>-604</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>-146</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>18</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>95</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>228</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>230</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>338</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>451</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>987</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>1231</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>3447</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>16844</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>121478</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>-3863</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>-510</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>-108</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>26</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>27</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>101</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>107</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>241</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>466</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>476</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>1155</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>1663</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>3904</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>57605</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>-2304</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>-447</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>-70</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>30</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>53</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>104</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>131</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>258</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>556</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>576</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>1187</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>5170</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>9440</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>80090</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>-9387</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>-698</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>-189</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>-6</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>11</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>71</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>89</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>182</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>394</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>719</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>1104</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>2320</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>9040</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>57695</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>-34902</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>-1054</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>-199</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>-11</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>8</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>65</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>152</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>223</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>331</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>690</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>862</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>1823</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>4631</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>17312</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>-92442</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>-1447</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>-394</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>-30</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>3</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>42</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>119</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>168</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>283</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>620</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>645</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>1264</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>3233</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>8271</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>-5573</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>-557</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>-144</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>15</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>19</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>98</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>231</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>248</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>392</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>454</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>1061</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>1343</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>3619</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>34253</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>-9368</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>-681</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>-188</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>-4</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>12</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>72</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>90</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>197</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>297</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>402</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>786</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>1162</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>2366</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>73235</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>-81391</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>-1247</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>-303</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>-26</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>4</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>48</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>120</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>184</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>292</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>639</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>657</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>1452</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>3439</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>9134</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
+          <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+        </column>
+      </datasource-dependencies>
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <actions>
+    <action caption='Filter 1 (generated)' name='[Action1]'>
+      <activation auto-clear='true' type='on-select' />
+      <source dashboard='Main Dashboard' type='sheet' worksheet='Global Cases' />
+      <command command='tsc:tsl-filter'>
+        <param name='special-fields' value='all' />
+        <param name='target' value='Main Dashboard' />
+      </command>
+    </action>
+    <action caption='Filter 2 (generated)' name='[Action2]'>
+      <activation auto-clear='true' type='on-select' />
+      <source dashboard='Main Dashboard' type='sheet' worksheet='List' />
+      <command command='tsc:tsl-filter'>
+        <param name='special-fields' value='all' />
+        <param name='target' value='Main Dashboard' />
+      </command>
+    </action>
+  </actions>
+  <worksheets>
+    <worksheet name='Compare Countries'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='2' fontname='Songti SC' fontsize='12'>Data updated till:</run>
+            <run bold='true' fontalignment='2' fontcolor='#ff0000' fontname='Songti SC' fontsize='12'> &lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938606087462923:qk]&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Output Extract' name='federated.04gsorz04qptme12pdqk30ccpx1u' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
+              <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.04gsorz04qptme12pdqk30ccpx1u'>
+            <column caption='Selection' datatype='integer' name='[Calculation_3138938605909622785]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [Parameters].[Parameter 1] = &quot;Deaths&quot; then&#10;   Sum([Deaths])&#10;    &#10;elseif [Parameters].[Parameter 1] = &quot;Confirmed Cases&quot; then&#10;    Sum([Confirmed Cases])&#10;&#10;elseif [Parameters].[Parameter 1] = &quot;Recovered&quot; then&#10;    Sum([Recovered])&#10;&#10;elseif [Parameters].[Parameter 1] = &quot;Active Cases&quot; then&#10;    Sum([Calculation_3138938605913772035])&#10;&#10;end' />
+            </column>
+            <column caption='Active cases' datatype='integer' name='[Calculation_3138938605913772035]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[Confirmed Cases] - [Deaths]- [Recovered]' />
+            </column>
+            <column caption='Last_date' datatype='date' name='[Calculation_3138938606087462923]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='{FIXED : MAX([Date])}' />
+            </column>
+            <column datatype='integer' name='[Confirmed Cases]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Country/Region]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='date' datatype-customized='true' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Deaths]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Recovered]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_3138938606087462923]' derivation='None' name='[none:Calculation_3138938606087462923:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Country/Region]' derivation='None' name='[none:Country/Region:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Date]' derivation='None' name='[none:Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_3138938605909622785]' derivation='User' name='[usr:Calculation_3138938605909622785:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]'>
+            <groupfilter function='union' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-manual-selection='true' user:ui-manual-selection-all-when-empty='true' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:Country/Region:nk]' member='&quot;China&quot;' />
+              <groupfilter function='member' level='[none:Country/Region:nk]' member='&quot;US&quot;' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' scope='rows' value='Cases Count' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='font-size' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='10' />
+            <format attr='font-weight' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='bold' />
+            <format attr='font-family' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='Songti SC' />
+            <format attr='font-family' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' value='Songti SC' />
+            <format attr='font-size' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' value='10' />
+            <format attr='font-weight' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' value='bold' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='in-tooltip' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938606087462923:qk]' value='false' />
+          </style-rule>
+          <style-rule element='legend'>
+            <format attr='border-style' value='solid' />
+            <format attr='font-family' value='Songti SC' />
+            <format attr='font-weight' value='bold' />
+            <format attr='font-size' value='12' />
+          </style-rule>
+          <style-rule element='legend-title'>
+            <format attr='font-family' value='Songti SC' />
+            <format attr='font-weight' value='bold' />
+            <format attr='font-size' value='12' />
+            <format attr='text-align' value='center' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='Legend' />
+          </style-rule>
+          <style-rule element='quick-filter'>
+            <format attr='title' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='Add Countries Below'>
+              <formatted-text>
+                <run bold='true'>Add Countries Below</run>
+              </formatted-text>
+            </format>
+            <format attr='font-family' value='Songti SC' />
+            <format attr='font-weight' value='bold' />
+            <format attr='border-style' value='solid' />
+            <format attr='font-size' value='12' />
+          </style-rule>
+          <style-rule element='quick-filter-title'>
+            <format attr='font-family' value='Songti SC' />
+            <format attr='text-align' value='center' />
+            <format attr='font-size' value='12' />
+            <format attr='font-weight' value='normal' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' />
+              <lod column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938606087462923:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]</rows>
+        <cols>[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]</cols>
+      </table>
+      <simple-id uuid='{229FA809-C6ED-46D4-8579-EFC6C60AFFD3}' />
+    </worksheet>
+    <worksheet name='DvR'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#000000' fontname='Songti SC'>&lt;</run>
+            <run fontalignment='1' fontcolor='#000000' fontname='Songti SC'>[federated.04gsorz04qptme12pdqk30ccpx1u].[Country/Region]</run>
+            <run fontalignment='1' fontcolor='#000000' fontname='Songti SC'>&gt; Recovered vs Deaths</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Output Extract' name='federated.04gsorz04qptme12pdqk30ccpx1u' />
+          </datasources>
+          <datasource-dependencies datasource='federated.04gsorz04qptme12pdqk30ccpx1u'>
+            <column caption='Last_date' datatype='date' name='[Calculation_3138938606087462923]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='{FIXED : MAX([Date])}' />
+            </column>
+            <column datatype='string' name='[Country/Region]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='date' datatype-customized='true' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Deaths]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Recovered]' role='measure' type='quantitative' />
+            <column-instance column='[Date]' derivation='None' name='[none:Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Deaths]' derivation='Sum' name='[sum:Deaths:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Recovered]' derivation='Sum' name='[sum:Recovered:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Country/Region)]'>
+            <groupfilter function='level-members' level='[Country/Region]' user:ui-action-filter='[Action1]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Last_date,Country/Region)]'>
+            <groupfilter function='crossjoin' user:ui-action-filter='[Action1]' user:ui-enumeration='all' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[Calculation_3138938606087462923]' />
+              <groupfilter function='level-members' level='[Country/Region]' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Country/Region)]</column>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Last_date,Country/Region)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]' scope='rows' value='Cases Count' />
+            <encoding attr='space' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Recovered:qk]' field-type='quantitative' fold='true' scope='rows' synchronized='true' type='space' />
+            <format attr='width' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]' value='64' />
+            <format attr='width' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Recovered:qk]' value='64' />
+            <format attr='display' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Recovered:qk]' scope='rows' value='false' />
+            <format attr='render-fold-reversed' value='true' />
+            <format attr='tick-color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='#000000' />
+            <format attr='tick-color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]' value='#000000' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='border-color' scope='rows' value='#ffffff' />
+            <format attr='border-style' scope='rows' value='solid' />
+            <format attr='color' data-class='total' scope='rows' value='#ffffff' />
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]' value='#ffffff' />
+            <format attr='color' data-class='subtotal' value='#898989' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='background-color' data-class='total' scope='rows' value='#ffffff' />
+            <format attr='color' data-class='total' scope='rows' value='#818b91' />
+            <format attr='background-color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]' value='#ffffff' />
+            <format attr='background-color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Recovered:qk]' value='#ffffff' />
+            <format attr='band-color' scope='rows' value='#ffffff' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]' value='#000000' />
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='#000000' />
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Recovered:qk]' value='#000000' />
+            <format attr='font-family' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='Songti SC' />
+            <format attr='font-size' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='10' />
+            <format attr='font-weight' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='bold' />
+            <format attr='font-family' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]' value='Songti SC' />
+            <format attr='font-size' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]' value='10' />
+            <format attr='font-weight' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]' value='bold' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='background-color' data-class='total' scope='rows' value='#ffffff' />
+            <format attr='band-color' scope='rows' value='#ffffff' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='background-color' value='#00000000' />
+            <format attr='band-size' scope='rows' value='1' />
+          </style-rule>
+          <style-rule element='caption'>
+            <format attr='background-color' value='#00000000' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-color' value='#000000' />
+          </style-rule>
+          <style-rule element='title'>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='1' />
+            <format attr='background-color' value='#ffffff' />
+          </style-rule>
+          <style-rule element='legend'>
+            <format attr='color' value='#000000' />
+            <format attr='background-color' value='#ffffff' />
+            <format attr='font-family' value='Songti SC' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' value='Measure Names' />
+          </style-rule>
+          <style-rule element='axis-title'>
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Recovered:qk]' value='#666666' />
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]' value='#000000' />
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='#000000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' />
+            </encodings>
+            <style>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='710' />
+                <format attr='maxwidth' value='710' />
+                <format attr='minheight' value='622' />
+                <format attr='maxheight' value='622' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' />
+            </encodings>
+          </pane>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Recovered:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>([federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Deaths:qk] + [federated.04gsorz04qptme12pdqk30ccpx1u].[sum:Recovered:qk])</rows>
+        <cols>[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]</cols>
+      </table>
+      <simple-id uuid='{85D190F6-F23E-4A49-BD15-0885F8F31224}' />
+    </worksheet>
+    <worksheet name='Global Cases'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='2' fontname='Songti SC' fontsize='12'>Data updated till: </run>
+            <run bold='true' fontalignment='2' fontcolor='#ff0000' fontname='Songti SC' fontsize='12'>&lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938606087462923:qk]&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Output Extract' name='federated.04gsorz04qptme12pdqk30ccpx1u' />
+            <datasource name='Parameters' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
+              <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.04gsorz04qptme12pdqk30ccpx1u'>
+            <column caption='Selection' datatype='integer' name='[Calculation_3138938605909622785]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [Parameters].[Parameter 1] = &quot;Deaths&quot; then&#10;   Sum([Deaths])&#10;    &#10;elseif [Parameters].[Parameter 1] = &quot;Confirmed Cases&quot; then&#10;    Sum([Confirmed Cases])&#10;&#10;elseif [Parameters].[Parameter 1] = &quot;Recovered&quot; then&#10;    Sum([Recovered])&#10;&#10;elseif [Parameters].[Parameter 1] = &quot;Active Cases&quot; then&#10;    Sum([Calculation_3138938605913772035])&#10;&#10;end' />
+            </column>
+            <column caption='Max_date' datatype='boolean' name='[Calculation_3138938605910118402]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='[Date] =  {FIXED : MAX([Date])}' />
+            </column>
+            <column caption='Active cases' datatype='integer' name='[Calculation_3138938605913772035]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[Confirmed Cases] - [Deaths]- [Recovered]' />
+            </column>
+            <column caption='Last_date' datatype='date' name='[Calculation_3138938606087462923]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='{FIXED : MAX([Date])}' />
+            </column>
+            <column datatype='integer' name='[Confirmed Cases]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Country/Region]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='date' datatype-customized='true' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Deaths]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Recovered]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_3138938605910118402]' derivation='None' name='[none:Calculation_3138938605910118402:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_3138938606087462923]' derivation='None' name='[none:Calculation_3138938606087462923:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Country/Region]' derivation='None' name='[none:Country/Region:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_3138938605909622785]' derivation='User' name='[usr:Calculation_3138938605909622785:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Country/Region)]'>
+            <groupfilter function='level-members' level='[Country/Region]' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[Exclusions (Country/Region,Last_date)]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='crossjoin'>
+                <groupfilter function='level-members' level='[none:Country/Region:nk]' />
+                <groupfilter function='level-members' level='[none:Calculation_3138938606087462923:qk]' />
+              </groupfilter>
+              <groupfilter function='reorder-dimensionality'>
+                <groupfilter function='crossjoin'>
+                  <groupfilter function='member' level='[none:Calculation_3138938606087462923:qk]' member='#2020-03-29#' />
+                  <groupfilter function='member' level='[none:Country/Region:nk]' member='&quot;Diamond Princess&quot;' />
+                </groupfilter>
+                <order>
+                  <hierarchy name='[none:Country/Region:nk]' />
+                  <hierarchy name='[none:Calculation_3138938606087462923:qk]' />
+                </order>
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938605910118402:nk]'>
+            <groupfilter function='member' level='[none:Calculation_3138938605910118402:nk]' member='true' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]'>
+            <groupfilter function='level-members' level='[none:Country/Region:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938605910118402:nk]</column>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Country/Region)]</column>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]</column>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[Exclusions (Country/Region,Last_date)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Longitude (generated)]' field-type='quantitative' max='24680455.938176908' min='-23434297.348772425' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Latitude (generated)]' field-type='quantitative' max='13914336.743390661' min='-7324482.8527727341' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' num-steps='100' palette='orange_gold_10_0' symmetric='false' type='interpolated' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='omit-on-special' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='false' />
+            <format attr='break-on-special' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='false' />
+            <format attr='show-null-value-warning' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='false' />
+            <format attr='omit-on-special' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Latitude (generated)]' value='false' />
+            <format attr='break-on-special' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Latitude (generated)]' value='false' />
+            <format attr='show-null-value-warning' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Latitude (generated)]' value='false' />
+            <format attr='omit-on-special' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Longitude (generated)]' value='false' />
+            <format attr='break-on-special' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Longitude (generated)]' value='false' />
+            <format attr='show-null-value-warning' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Longitude (generated)]' value='false' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='in-tooltip' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938606087462923:qk]' value='false' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' value='Cases'>
+              <formatted-text>
+                <run>Cases</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Multipolygon' />
+            <encodings>
+              <color column='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' />
+              <lod column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' />
+              <lod column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938606087462923:qk]' />
+              <geometry column='[federated.04gsorz04qptme12pdqk30ccpx1u].[Geometry (generated)]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.04gsorz04qptme12pdqk30ccpx1u].[Latitude (generated)]</rows>
+        <cols>[federated.04gsorz04qptme12pdqk30ccpx1u].[Longitude (generated)]</cols>
+        <show-full-range>
+          <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[Recovered (bin)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{519724CD-756A-4E43-9BB4-8F4491669A2D}' />
+    </worksheet>
+    <worksheet name='List'>
+      <layout-options>
+        <title>
+          <formatted-text />
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Output Extract' name='federated.04gsorz04qptme12pdqk30ccpx1u' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
+              <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.04gsorz04qptme12pdqk30ccpx1u'>
+            <column caption='Selection' datatype='integer' name='[Calculation_3138938605909622785]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [Parameters].[Parameter 1] = &quot;Deaths&quot; then&#10;   Sum([Deaths])&#10;    &#10;elseif [Parameters].[Parameter 1] = &quot;Confirmed Cases&quot; then&#10;    Sum([Confirmed Cases])&#10;&#10;elseif [Parameters].[Parameter 1] = &quot;Recovered&quot; then&#10;    Sum([Recovered])&#10;&#10;elseif [Parameters].[Parameter 1] = &quot;Active Cases&quot; then&#10;    Sum([Calculation_3138938605913772035])&#10;&#10;end' />
+            </column>
+            <column caption='Max_date' datatype='boolean' name='[Calculation_3138938605910118402]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='[Date] =  {FIXED : MAX([Date])}' />
+            </column>
+            <column caption='Active cases' datatype='integer' name='[Calculation_3138938605913772035]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[Confirmed Cases] - [Deaths]- [Recovered]' />
+            </column>
+            <column caption='Last_date' datatype='date' name='[Calculation_3138938606087462923]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='{FIXED : MAX([Date])}' />
+            </column>
+            <column datatype='integer' name='[Confirmed Cases]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Country/Region]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='date' datatype-customized='true' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Deaths]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Recovered]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_3138938605910118402]' derivation='None' name='[none:Calculation_3138938605910118402:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Country/Region]' derivation='None' name='[none:Country/Region:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_3138938605909622785]' derivation='User' name='[usr:Calculation_3138938605909622785:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Country/Region)]'>
+            <groupfilter function='level-members' level='[Country/Region]' user:ui-action-filter='[Action1]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Last_date,Country/Region)]'>
+            <groupfilter function='crossjoin' user:ui-action-filter='[Action1]' user:ui-enumeration='all' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[Calculation_3138938606087462923]' />
+              <groupfilter function='level-members' level='[Country/Region]' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938605910118402:nk]'>
+            <groupfilter function='member' level='[none:Calculation_3138938605910118402:nk]' member='true' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <computed-sort column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' direction='DESC' using='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' />
+          <slices>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938605910118402:nk]</column>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Country/Region)]</column>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Last_date,Country/Region)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='width' value='92' />
+            <format attr='color' data-class='subtotal' value='#e15759' />
+            <format attr='font-size' data-class='subtotal' value='14' />
+            <format attr='font-family' data-class='total' value='Songti SC' />
+            <format attr='font-family' data-class='subtotal' value='Songti SC' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='132' />
+            <format attr='color' data-class='subtotal' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='#e15759' />
+            <format attr='font-size' data-class='subtotal' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='16' />
+            <format attr='total-label' data-class='subtotal' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='Total Cases' />
+            <format attr='font-family' data-class='subtotal' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='Songti SC' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='font-family' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='Songti SC' />
+            <format attr='font-size' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='10' />
+            <format attr='font-weight' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' value='bold' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='background-color' value='#00000000' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='rows' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <lod column='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' />
+              <text column='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows onTop='true' total='true'>[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{0B59A38E-0984-4FC2-AA5B-1DA9F874E9BC}' />
+    </worksheet>
+    <worksheet name='total cases'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#000000' fontname='Songti SC'>&lt;</run>
+            <run fontalignment='1' fontcolor='#000000' fontname='Songti SC'>[federated.04gsorz04qptme12pdqk30ccpx1u].[Country/Region]</run>
+            <run fontalignment='1' fontcolor='#000000' fontname='Songti SC'>&gt; Cases</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Output Extract' name='federated.04gsorz04qptme12pdqk30ccpx1u' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
+              <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.04gsorz04qptme12pdqk30ccpx1u'>
+            <column caption='Selection' datatype='integer' name='[Calculation_3138938605909622785]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [Parameters].[Parameter 1] = &quot;Deaths&quot; then&#10;   Sum([Deaths])&#10;    &#10;elseif [Parameters].[Parameter 1] = &quot;Confirmed Cases&quot; then&#10;    Sum([Confirmed Cases])&#10;&#10;elseif [Parameters].[Parameter 1] = &quot;Recovered&quot; then&#10;    Sum([Recovered])&#10;&#10;elseif [Parameters].[Parameter 1] = &quot;Active Cases&quot; then&#10;    Sum([Calculation_3138938605913772035])&#10;&#10;end' />
+            </column>
+            <column caption='Active cases' datatype='integer' name='[Calculation_3138938605913772035]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[Confirmed Cases] - [Deaths]- [Recovered]' />
+            </column>
+            <column caption='Positive change others' datatype='string' name='[Calculation_3138938605947031556]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='if (ZN([Calculation_3138938605909622785]) - LOOKUP(ZN([Calculation_3138938605909622785]), -1))&gt; 0 AND ([Parameters].[Parameter 1] != &apos;Recovered&apos;)  then &quot;▲&quot; end'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Negative change others' datatype='string' name='[Calculation_3138938605947359238]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='if (ZN([Calculation_3138938605909622785]) - LOOKUP(ZN([Calculation_3138938605909622785]), -1) &lt; 0) AND ([Parameters].[Parameter 1] != &apos;Recovered&apos;) then &quot;▼&quot; end'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Last_date' datatype='date' name='[Calculation_3138938606087462923]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='{FIXED : MAX([Date])}' />
+            </column>
+            <column datatype='integer' name='[Confirmed Cases]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Country/Region]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='date' datatype-customized='true' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Deaths]' role='measure' type='quantitative' />
+            <column caption='Negative change recovered' datatype='string' name='[Negative change others (copy)_3138938605952479239]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='if ((ZN([Calculation_3138938605909622785]) - LOOKUP(ZN([Calculation_3138938605909622785]), -1) &lt; 0) AND ([Parameters].[Parameter 1] = &apos;Recovered&apos;)) then &quot;▼&quot; end'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Positive change recovered' datatype='string' name='[Positive change others (copy)_3138938605952610312]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='if (ZN([Calculation_3138938605909622785]) - LOOKUP(ZN([Calculation_3138938605909622785]), -1))&gt; 0 AND ([Parameters].[Parameter 1] = &apos;Recovered&apos;)  then &quot;▲&quot; end'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column datatype='integer' name='[Recovered]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_3138938605909622785]' derivation='User' name='[diff:usr:Calculation_3138938605909622785:qk]' pivot='key' type='quantitative'>
+              <table-calc diff-options='Relative' ordering-type='Rows' type='Difference'>
+                <address>
+                  <value>-1</value>
+                </address>
+              </table-calc>
+            </column-instance>
+            <column-instance column='[Date]' derivation='None' name='[none:Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_3138938605909622785]' derivation='User' name='[usr:Calculation_3138938605909622785:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_3138938605947031556]' derivation='User' name='[usr:Calculation_3138938605947031556:nk]' pivot='key' type='nominal'>
+              <table-calc ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[Calculation_3138938605947359238]' derivation='User' name='[usr:Calculation_3138938605947359238:nk]' pivot='key' type='nominal'>
+              <table-calc ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[Negative change others (copy)_3138938605952479239]' derivation='User' name='[usr:Negative change others (copy)_3138938605952479239:nk]' pivot='key' type='nominal'>
+              <table-calc ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[Positive change others (copy)_3138938605952610312]' derivation='User' name='[usr:Positive change others (copy)_3138938605952610312:nk]' pivot='key' type='nominal'>
+              <table-calc ordering-type='Rows' />
+            </column-instance>
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Country/Region)]'>
+            <groupfilter function='level-members' level='[Country/Region]' user:ui-action-filter='[Action1]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Last_date,Country/Region)]'>
+            <groupfilter function='crossjoin' user:ui-action-filter='[Action1]' user:ui-enumeration='all' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[Calculation_3138938606087462923]' />
+              <groupfilter function='level-members' level='[Country/Region]' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Country/Region)]</column>
+            <column>[federated.04gsorz04qptme12pdqk30ccpx1u].[Action (Last_date,Country/Region)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' scope='rows' value='Cases Count' />
+            <format attr='tick-color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='#000000' />
+            <format attr='tick-color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' value='#000000' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='color' data-class='total' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='#bab0ac' />
+            <format attr='color' data-class='subtotal' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='#000000' />
+            <format attr='color' value='#000000' />
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='solid' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='band-color' scope='rows' value='#000000' />
+            <format attr='color' data-class='subtotal' value='#000000' />
+            <format attr='background-color' data-class='subtotal' value='#000000' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' value='#000000' />
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='#000000' />
+            <format attr='font-family' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='Songti SC' />
+            <format attr='font-family' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' value='Songti SC' />
+            <format attr='font-size' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' value='10' />
+            <format attr='font-weight' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' value='bold' />
+            <format attr='font-size' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='10' />
+            <format attr='font-weight' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]' value='bold' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' num-steps='30' palette='orange_gold_10_0' type='interpolated' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-style' value='solid' />
+            <format attr='border-color' value='#000000' />
+            <format attr='band-color' scope='rows' value='#000000' />
+            <format attr='background-color' value='#00000000' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='background-color' value='#ffffff' />
+            <format attr='band-size' scope='rows' value='1' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='color' value='#ffffff' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='line-visibility' scope='rows' value='on' />
+            <format attr='line-pattern-only' scope='rows' value='solid' />
+          </style-rule>
+          <style-rule element='title'>
+            <format attr='background-color' value='#ffffff' />
+            <format attr='border-width' value='1' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-color' value='#000000' />
+          </style-rule>
+          <style-rule element='legend'>
+            <format attr='color' value='#000000' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' value='Cases'>
+              <formatted-text>
+                <run>Cases</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' />
+              <lod column='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' />
+              <lod column='[federated.04gsorz04qptme12pdqk30ccpx1u].[diff:usr:Calculation_3138938605909622785:qk]' />
+              <tooltip column='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605947359238:nk]' />
+              <tooltip column='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605947031556:nk]' />
+              <tooltip column='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Negative change others (copy)_3138938605952479239:nk]' />
+              <tooltip column='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Positive change others (copy)_3138938605952610312:nk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Cases increased on  </run>
+                <run bold='true'>&lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]&gt;:  &lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[diff:usr:Calculation_3138938605909622785:qk]&gt;  </run>
+                <run bold='true' fontcolor='#e15759'>&lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605947031556:nk]&gt;</run>
+                <run bold='true'>Æ  </run>
+                <run bold='true' fontcolor='#59a14f'>&lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605947359238:nk]&gt; &lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Positive change others (copy)_3138938605952610312:nk]&gt; </run>
+                <run bold='true' fontcolor='#e15759'>&lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Negative change others (copy)_3138938605952479239:nk]&gt;</run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Total Cases till </run>
+                <run bold='true' fontcolor='#000000'>&lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]&gt;</run>
+                <run fontcolor='#000000'>: </run>
+                <run bold='true' fontcolor='#000000'>&lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]&gt;</run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='812' />
+                <format attr='maxwidth' value='812' />
+                <format attr='minheight' value='622' />
+                <format attr='maxheight' value='622' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]</rows>
+        <cols>[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]</cols>
+      </table>
+      <simple-id uuid='{9F1BE240-F206-4C10-9E9C-AA3CE058960E}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard name='Compare by Countries'>
+      <style>
+        <style-rule element='parameter-ctrl'>
+          <format attr='font-family' value='Songti SC' />
+          <format attr='font-size' value='12' />
+          <format attr='border-style' value='solid' />
+        </style-rule>
+        <style-rule element='parameter-ctrl-title'>
+          <format attr='font-family' value='Songti SC' />
+          <format attr='font-size' value='12' />
+          <format attr='text-align' value='center' />
+        </style-rule>
+      </style>
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <datasources>
+        <datasource name='Parameters' />
+        <datasource caption='Output Extract' name='federated.04gsorz04qptme12pdqk30ccpx1u' />
+      </datasources>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
+          <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+          <members>
+            <member value='&quot;Confirmed Cases&quot;' />
+            <member value='&quot;Recovered&quot;' />
+            <member value='&quot;Deaths&quot;' />
+            <member value='&quot;Active Cases&quot;' />
+          </members>
+        </column>
+      </datasource-dependencies>
+      <datasource-dependencies datasource='federated.04gsorz04qptme12pdqk30ccpx1u'>
+        <column datatype='string' name='[Country/Region]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+        <column-instance column='[Country/Region]' derivation='None' name='[none:Country/Region:nk]' pivot='key' type='nominal' />
+      </datasource-dependencies>
+      <zones>
+        <zone h='100000' id='13' type='layout-basic' w='100000' x='0' y='0'>
+          <zone h='100000' id='12' type='text' w='100000' x='0' y='0'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+        </zone>
+        <zone forceUpdate='true' h='7625' id='11' type='text' w='99900' x='100' y='1500'>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontcolor='#000000' fontname='Songti SC' fontsize='16' underline='true'>Covid 19 Global Cases Dashboard By Shashank Sharma</run>
+          </formatted-text>
+        </zone>
+        <zone h='81000' id='3' name='Compare Countries' w='83200' x='16700' y='4000' />
+        <zone h='27750' id='8' mode='typeinlist' name='Compare Countries' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' show-all='false' show-exclude='false' show-filter-state='false' type='filter' w='16800' x='100' y='27750' />
+        <zone custom-title='true' h='17125' id='10' mode='list' param='[Parameters].[Parameter 1]' type='paramctrl' w='16800' x='100' y='9750'>
+          <formatted-text>
+            <run bold='true'>View Data for</run>
+          </formatted-text>
+        </zone>
+        <zone h='16875' id='9' name='Compare Countries' pane-specification-id='0' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' type='color' w='16700' x='200' y='56375' />
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='39' type='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='38' param='vert' type='layout-flow' w='98400' x='800' y='1000'>
+                <zone h='100000' id='12' type='text' w='100000' x='0' y='0'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone forceUpdate='true' h='7625' id='11' type='text' w='99900' x='100' y='1500'>
+                  <formatted-text>
+                    <run bold='true' fontalignment='1' fontcolor='#000000' fontname='Songti SC' fontsize='16' underline='true'>Covid 19 Global Cases Dashboard By Shashank Sharma</run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='27750' id='8' mode='checkdropdown' name='Compare Countries' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' show-all='false' show-exclude='false' show-filter-state='false' type='filter' w='16800' x='100' y='27750'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='81000' id='3' is-fixed='true' name='Compare Countries' w='83200' x='16700' y='4000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='16875' id='9' name='Compare Countries' pane-specification-id='0' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' type='color' w='16700' x='200' y='56375'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone custom-title='true' h='17125' id='10' mode='list' param='[Parameters].[Parameter 1]' type='paramctrl' w='16800' x='100' y='9750'>
+                  <formatted-text>
+                    <run bold='true'>View Data for</run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{BC1C785D-A8EE-48DF-96A4-B2BB7FCB540B}' />
+    </dashboard>
+    <dashboard name='Main Dashboard'>
+      <style>
+        <style-rule element='parameter-ctrl'>
+          <format attr='font-family' value='Songti SC' />
+          <format attr='font-size' value='12' />
+          <format attr='border-style' value='solid' />
+        </style-rule>
+        <style-rule element='parameter-ctrl-title'>
+          <format attr='font-family' value='Songti SC' />
+          <format attr='text-align' value='center' />
+        </style-rule>
+      </style>
+      <size maxheight='850' maxwidth='1100' minheight='850' minwidth='1100' preset-index='11' sizing-mode='fixed' />
+      <datasources>
+        <datasource name='Parameters' />
+      </datasources>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
+          <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+          <members>
+            <member value='&quot;Confirmed Cases&quot;' />
+            <member value='&quot;Recovered&quot;' />
+            <member value='&quot;Deaths&quot;' />
+            <member value='&quot;Active Cases&quot;' />
+          </members>
+        </column>
+      </datasource-dependencies>
+      <zones>
+        <zone h='48471' id='1' name='Global Cases' w='76909' x='23000' y='824' />
+        <zone h='8941' id='6' name='Global Cases' pane-specification-id='0' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' type='color' w='12727' x='86182' y='41765' />
+        <zone custom-title='true' h='16353' id='7' mode='list' param='[Parameters].[Parameter 1]' type='paramctrl' w='20545' x='364' y='2941'>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontsize='14'>View Data for</run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='4824' id='8' type='text' w='45182' x='26727' y='0'>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontcolor='#000000' fontname='Songti SC' fontsize='16' underline='true'>Covid 19 Global Cases Dashboard By Shashank Sharma</run>
+          </formatted-text>
+        </zone>
+        <zone h='29294' id='9' name='List' w='23455' x='182' y='18941' />
+        <zone h='50706' id='10' name='total cases' w='49727' x='91' y='48941' />
+        <zone h='6471' id='17' name='total cases' pane-specification-id='2' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' type='color' w='19000' x='9091' y='53647' />
+        <zone h='50824' id='18' name='DvR' w='50182' x='49727' y='48941' />
+        <zone h='6824' id='23' name='DvR' pane-specification-id='2' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' show-title='false' type='color' w='12727' x='68909' y='53765' />
+      </zones>
+      <devicelayouts>
+        <devicelayout name='Phone'>
+          <size maxheight='1500' minheight='1500' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='51' type='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98934' id='50' param='vert' type='layout-flow' w='95734' x='2133' y='533'>
+                <zone forceUpdate='true' h='4533' id='8' type='text' w='95734' x='2133' y='533'>
+                  <formatted-text>
+                    <run bold='true' fontalignment='1' fontcolor='#000000' fontname='Songti SC' fontsize='16' underline='true'>Covid 19 Global Cases Dashboard By Shashank Sharma</run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone custom-title='true' h='10000' id='7' mode='list' param='[Parameters].[Parameter 1]' type='paramctrl' w='95734' x='2133' y='5066'>
+                  <formatted-text>
+                    <run bold='true' fontalignment='1' fontsize='14'>View Data for</run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='293' h='20066' id='1' is-fixed='true' name='Global Cases' w='95734' x='2133' y='15066'>
+                  <layout-cache minheight='239' type-h='scalable' type-w='fixed' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+            <zone h='5067' id='6' name='Global Cases' pane-specification-id='0' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' type='color' w='25067' x='70133' y='30933'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='padding' value='0' />
+              </zone-style>
+            </zone>
+            <zone fixed-size='249' h='16933' id='9' is-fixed='true' name='List' w='69867' x='13867' y='36267'>
+              <layout-cache type-h='fixed' type-w='fixed' />
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='padding' value='0' />
+              </zone-style>
+            </zone>
+            <zone fixed-size='280' h='16933' id='10' is-fixed='true' name='total cases' w='98400' x='800' y='53467'>
+              <layout-cache has-max-size-h='true' maxheight='719' minheight='719' type-h='scalable' type-w='fixed' />
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='padding' value='0' />
+              </zone-style>
+            </zone>
+            <zone fixed-size='280' h='16933' id='18' is-fixed='true' name='DvR' w='98400' x='533' y='70733'>
+              <layout-cache has-max-size-h='true' maxheight='719' minheight='719' type-h='scalable' type-w='fixed' />
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='padding' value='0' />
+              </zone-style>
+            </zone>
+            <zone h='2667' id='23' name='DvR' pane-specification-id='2' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' show-title='false' type='color' w='37333' x='16000' y='73400'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='padding' value='0' />
+              </zone-style>
+            </zone>
+            <zone h='5067' id='17' name='total cases' pane-specification-id='2' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' type='color' w='24267' x='18400' y='55600'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='padding' value='0' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{E698D060-29F2-4112-8241-08C3E3659731}' />
+    </dashboard>
+  </dashboards>
+  <windows source-height='30'>
+    <window class='dashboard' maximized='true' name='Main Dashboard' tab-color='#4f779a'>
+      <viewpoints>
+        <viewpoint name='DvR'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Global Cases'>
+          <zoom type='entire-view' />
+          <default-map-tool-selection tool='1' />
+        </viewpoint>
+        <viewpoint name='List' />
+        <viewpoint name='total cases'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='1' />
+      <simple-id uuid='{5480C5D9-48F6-4795-AB35-AB653297D423}' />
+    </window>
+    <window class='worksheet' name='Global Cases'>
+      <cards>
+        <edge name='left'>
+          <strip size='204'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='list' param='[Parameters].[Parameter 1]' type='parameter' />
+            <card pane-specification-id='0' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='1' />
+      </viewpoint>
+      <simple-id uuid='{83E359CD-39DA-4956-BC3C-1C5DD2D7C5C9}' />
+    </window>
+    <window class='worksheet' name='List'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='compact' param='[Parameters].[Parameter 1]' type='parameter' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{03AA825E-FF93-4633-8389-52C539B0F6AD}' />
+    </window>
+    <window class='worksheet' name='total cases'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='compact' param='[Parameters].[Parameter 1]' type='parameter' />
+            <card pane-specification-id='2' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{A431271C-7502-4169-BEF2-0BF1809F986B}' />
+    </window>
+    <window class='worksheet' name='DvR'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='2' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{D3590CC7-BBBC-4131-A874-5A6702F2B437}' />
+    </window>
+    <window class='dashboard' name='Compare by Countries'>
+      <viewpoints>
+        <viewpoint name='Compare Countries'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='12' />
+      <simple-id uuid='{E34F19BA-A35F-428D-B381-528475ABC101}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Compare Countries'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='list' param='[Parameters].[Parameter 1]' type='parameter' />
+            <card pane-specification-id='0' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{A21050B8-C874-4294-8921-3FC9E6961F73}' />
+    </window>
+  </windows>
+</workbook>
