@@ -19,8 +19,8 @@
   <datasources>
     <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
       <aliases enabled='yes' />
-      <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
-        <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+      <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Active Cases&quot;'>
+        <calculation class='tableau' formula='&quot;Active Cases&quot;' />
         <members>
           <member value='&quot;Confirmed Cases&quot;' />
           <member value='&quot;Recovered&quot;' />
@@ -182,7 +182,7 @@
           <groupfilter function='level-members' level='[none:Calculation_3138938605909622785:qk]' />
         </groupfilter>
       </group>
-      <layout dim-ordering='alphabetic' dim-percentage='0.310345' measure-ordering='alphabetic' measure-percentage='0.451149' parameter-percentage='0.238506' rowDisplayCount='70000' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.312407' measure-ordering='alphabetic' measure-percentage='0.408072' parameter-percentage='0.279522' rowDisplayCount='70000' show-structure='true' />
       <style>
         <style-rule element='mark'>
           <encoding attr='color' field='[diff:usr:Calculation_3138938605909622785:ok:2]' type='palette'>
@@ -1592,8 +1592,8 @@
         <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
       </semantic-values>
       <datasource-dependencies datasource='Parameters'>
-        <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
-          <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+        <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Active Cases&quot;'>
+          <calculation class='tableau' formula='&quot;Active Cases&quot;' />
         </column>
       </datasource-dependencies>
     </datasource>
@@ -1636,8 +1636,8 @@
             <datasource name='Parameters' />
           </datasources>
           <datasource-dependencies datasource='Parameters'>
-            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
-              <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Active Cases&quot;'>
+              <calculation class='tableau' formula='&quot;Active Cases&quot;' />
             </column>
           </datasource-dependencies>
           <datasource-dependencies datasource='federated.04gsorz04qptme12pdqk30ccpx1u'>
@@ -1663,7 +1663,8 @@
           <filter class='categorical' column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]'>
             <groupfilter function='union' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
               <groupfilter function='member' level='[none:Country/Region:nk]' member='&quot;China&quot;' />
-              <groupfilter function='member' level='[none:Country/Region:nk]' member='&quot;US&quot;' />
+              <groupfilter function='member' level='[none:Country/Region:nk]' member='&quot;Italy&quot;' />
+              <groupfilter function='member' level='[none:Country/Region:nk]' member='&quot;Spain&quot;' />
             </groupfilter>
           </filter>
           <slices>
@@ -1923,8 +1924,8 @@
             <mapsource name='Tableau' />
           </mapsources>
           <datasource-dependencies datasource='Parameters'>
-            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
-              <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Active Cases&quot;'>
+              <calculation class='tableau' formula='&quot;Active Cases&quot;' />
             </column>
           </datasource-dependencies>
           <datasource-dependencies datasource='federated.04gsorz04qptme12pdqk30ccpx1u'>
@@ -1975,8 +1976,8 @@
         </view>
         <style>
           <style-rule element='axis'>
-            <encoding attr='space' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Longitude (generated)]' field-type='quantitative' max='25776561.181137405' min='-23306180.750673309' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
-            <encoding attr='space' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Latitude (generated)]' field-type='quantitative' max='13174109.786956012' min='-8064709.8092073835' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Longitude (generated)]' field-type='quantitative' max='25150215.28641592' min='-23932526.645394791' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[Latitude (generated)]' field-type='quantitative' max='13857396.208280303' min='-7381423.3878830913' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
           </style-rule>
           <style-rule element='mark'>
             <encoding attr='color' field='[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]' num-steps='100' palette='orange_gold_10_0' symmetric='false' type='interpolated' />
@@ -2045,8 +2046,8 @@
             <datasource name='Parameters' />
           </datasources>
           <datasource-dependencies datasource='Parameters'>
-            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
-              <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Active Cases&quot;'>
+              <calculation class='tableau' formula='&quot;Active Cases&quot;' />
             </column>
           </datasource-dependencies>
           <datasource-dependencies datasource='federated.04gsorz04qptme12pdqk30ccpx1u'>
@@ -2155,8 +2156,8 @@
             <datasource name='Parameters' />
           </datasources>
           <datasource-dependencies datasource='Parameters'>
-            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
-              <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+            <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Active Cases&quot;'>
+              <calculation class='tableau' formula='&quot;Active Cases&quot;' />
             </column>
           </datasource-dependencies>
           <datasource-dependencies datasource='federated.04gsorz04qptme12pdqk30ccpx1u'>
@@ -2361,8 +2362,8 @@
         <datasource caption='Output Extract' name='federated.04gsorz04qptme12pdqk30ccpx1u' />
       </datasources>
       <datasource-dependencies datasource='Parameters'>
-        <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
-          <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+        <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Active Cases&quot;'>
+          <calculation class='tableau' formula='&quot;Active Cases&quot;' />
           <members>
             <member value='&quot;Confirmed Cases&quot;' />
             <member value='&quot;Recovered&quot;' />
@@ -2497,8 +2498,8 @@
         <datasource name='Parameters' />
       </datasources>
       <datasource-dependencies datasource='Parameters'>
-        <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Confirmed Cases&quot;'>
-          <calculation class='tableau' formula='&quot;Confirmed Cases&quot;' />
+        <column caption='Show Data for' datatype='string' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;Active Cases&quot;'>
+          <calculation class='tableau' formula='&quot;Active Cases&quot;' />
           <members>
             <member value='&quot;Confirmed Cases&quot;' />
             <member value='&quot;Recovered&quot;' />
@@ -2630,7 +2631,7 @@
       <simple-id uuid='{E698D060-29F2-4112-8241-08C3E3659731}' />
     </dashboard>
   </dashboards>
-  <windows source-height='30'>
+  <windows pres-mode='true' source-height='30'>
     <window class='dashboard' name='Main Dashboard' tab-color='#4f779a'>
       <viewpoints>
         <viewpoint name='DvR'>
@@ -2645,76 +2646,10 @@
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='9' />
+      <active id='1' />
       <simple-id uuid='{5480C5D9-48F6-4795-AB35-AB653297D423}' />
     </window>
-    <window class='dashboard' maximized='true' name='Compare by Countries'>
-      <viewpoints>
-        <viewpoint name='Compare Countries'>
-          <zoom type='entire-view' />
-        </viewpoint>
-      </viewpoints>
-      <active id='-1' />
-      <simple-id uuid='{E34F19BA-A35F-428D-B381-528475ABC101}' />
-    </window>
-    <window class='worksheet' hidden='true' name='Compare Countries'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card mode='list' param='[Parameters].[Parameter 1]' type='parameter' />
-            <card pane-specification-id='0' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' type='color' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{A21050B8-C874-4294-8921-3FC9E6961F73}' />
-    </window>
-    <window class='worksheet' hidden='true' name='DvR'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card pane-specification-id='2' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' type='color' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{D3590CC7-BBBC-4131-A874-5A6702F2B437}' />
-    </window>
-    <window class='worksheet' hidden='true' name='Global Cases'>
+    <window class='worksheet' maximized='true' name='Global Cases'>
       <cards>
         <edge name='left'>
           <strip size='204'>
@@ -2746,7 +2681,7 @@
       </viewpoint>
       <simple-id uuid='{83E359CD-39DA-4956-BC3C-1C5DD2D7C5C9}' />
     </window>
-    <window class='worksheet' hidden='true' name='List'>
+    <window class='worksheet' name='List'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -2774,7 +2709,7 @@
       </cards>
       <simple-id uuid='{03AA825E-FF93-4633-8389-52C539B0F6AD}' />
     </window>
-    <window class='worksheet' hidden='true' name='total cases'>
+    <window class='worksheet' name='total cases'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -2802,6 +2737,72 @@
         </edge>
       </cards>
       <simple-id uuid='{A431271C-7502-4169-BEF2-0BF1809F986B}' />
+    </window>
+    <window class='worksheet' name='DvR'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='2' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{D3590CC7-BBBC-4131-A874-5A6702F2B437}' />
+    </window>
+    <window class='dashboard' name='Compare by Countries'>
+      <viewpoints>
+        <viewpoint name='Compare Countries'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='8' />
+      <simple-id uuid='{E34F19BA-A35F-428D-B381-528475ABC101}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Compare Countries'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='list' param='[Parameters].[Parameter 1]' type='parameter' />
+            <card pane-specification-id='0' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{A21050B8-C874-4294-8921-3FC9E6961F73}' />
     </window>
   </windows>
 </workbook>
