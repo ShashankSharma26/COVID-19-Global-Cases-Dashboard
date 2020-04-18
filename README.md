@@ -11,11 +11,11 @@ The dashboard is designed  to show the full picture of the situation with emphas
 
 # Dashboard using Tableau Desktop
 
-The dashboard contains two tabs explained as shown below:
-
-* "Main dashboard" displays in depth to analyse the condition in glob 
-* "Compare by countries" allows the user to compare the change in cases between multiple countries to get a deeper understanding of the spread of the virus.
+The dashboard contains two tabs as shown below:
 ![](images/tabs.png)
+* "Main dashboard" displays in-depth analysis of the global/country-wise cases.
+* "Compare by countries" allows the user to compare the change in cases between multiple countries to get a deeper understanding of the spread of the virus.
+
 
 
 
