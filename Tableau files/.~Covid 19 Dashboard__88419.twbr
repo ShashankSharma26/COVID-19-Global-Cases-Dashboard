@@ -11,7 +11,7 @@
     <WorksheetBackgroundTransparency />
     <ZoneBackgroundTransparency />
   </document-format-change-manifest>
-  <repository-location id='Covid19DashboardbyShashankSharma' path='/workbooks' revision='5.9' />
+  <repository-location id='Covid19DashboardbyShashankSharma' path='/workbooks' revision='6.0' />
   <preferences>
     <preference name='ui.encoding.shelf.height' value='24' />
     <preference name='ui.shelf.height' value='26' />
@@ -1725,6 +1725,18 @@
               <color column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' />
               <lod column='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Calculation_3138938606087462923:qk]' />
             </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Country/Region:&#9;</run>
+                <run bold='true'>&lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]&gt;</run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Date:&#9;</run>
+                <run bold='true'>&lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Date:qk]&gt;</run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cases:&#9;</run>
+                <run bold='true'>&lt;[federated.04gsorz04qptme12pdqk30ccpx1u].[usr:Calculation_3138938605909622785:qk]&gt;</run>
+              </formatted-text>
+            </customized-tooltip>
             <style>
               <style-rule element='mark'>
                 <format attr='mark-labels-cull' value='true' />
@@ -2633,10 +2645,76 @@
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='1' />
+      <active id='9' />
       <simple-id uuid='{5480C5D9-48F6-4795-AB35-AB653297D423}' />
     </window>
-    <window class='worksheet' name='Global Cases'>
+    <window class='dashboard' maximized='true' name='Compare by Countries'>
+      <viewpoints>
+        <viewpoint name='Compare Countries'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='-1' />
+      <simple-id uuid='{E34F19BA-A35F-428D-B381-528475ABC101}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Compare Countries'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='list' param='[Parameters].[Parameter 1]' type='parameter' />
+            <card pane-specification-id='0' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{A21050B8-C874-4294-8921-3FC9E6961F73}' />
+    </window>
+    <window class='worksheet' hidden='true' name='DvR'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='2' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{D3590CC7-BBBC-4131-A874-5A6702F2B437}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Global Cases'>
       <cards>
         <edge name='left'>
           <strip size='204'>
@@ -2668,7 +2746,7 @@
       </viewpoint>
       <simple-id uuid='{83E359CD-39DA-4956-BC3C-1C5DD2D7C5C9}' />
     </window>
-    <window class='worksheet' name='List'>
+    <window class='worksheet' hidden='true' name='List'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -2696,7 +2774,7 @@
       </cards>
       <simple-id uuid='{03AA825E-FF93-4633-8389-52C539B0F6AD}' />
     </window>
-    <window class='worksheet' name='total cases'>
+    <window class='worksheet' hidden='true' name='total cases'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -2724,72 +2802,6 @@
         </edge>
       </cards>
       <simple-id uuid='{A431271C-7502-4169-BEF2-0BF1809F986B}' />
-    </window>
-    <window class='worksheet' name='DvR'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card pane-specification-id='2' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[:Measure Names]' type='color' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{D3590CC7-BBBC-4131-A874-5A6702F2B437}' />
-    </window>
-    <window class='dashboard' maximized='true' name='Compare by Countries'>
-      <viewpoints>
-        <viewpoint name='Compare Countries'>
-          <zoom type='entire-view' />
-        </viewpoint>
-      </viewpoints>
-      <active id='-1' />
-      <simple-id uuid='{E34F19BA-A35F-428D-B381-528475ABC101}' />
-    </window>
-    <window class='worksheet' name='Compare Countries'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card mode='list' param='[Parameters].[Parameter 1]' type='parameter' />
-            <card pane-specification-id='0' param='[federated.04gsorz04qptme12pdqk30ccpx1u].[none:Country/Region:nk]' type='color' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{A21050B8-C874-4294-8921-3FC9E6961F73}' />
     </window>
   </windows>
 </workbook>
