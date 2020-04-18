@@ -2631,7 +2631,7 @@
       <simple-id uuid='{E698D060-29F2-4112-8241-08C3E3659731}' />
     </dashboard>
   </dashboards>
-  <windows pres-mode='true' source-height='30'>
+  <windows source-height='30'>
     <window class='dashboard' name='Main Dashboard' tab-color='#4f779a'>
       <viewpoints>
         <viewpoint name='DvR'>
@@ -2649,7 +2649,7 @@
       <active id='1' />
       <simple-id uuid='{5480C5D9-48F6-4795-AB35-AB653297D423}' />
     </window>
-    <window class='worksheet' maximized='true' name='Global Cases'>
+    <window class='worksheet' name='Global Cases'>
       <cards>
         <edge name='left'>
           <strip size='204'>
@@ -2766,13 +2766,13 @@
       </cards>
       <simple-id uuid='{D3590CC7-BBBC-4131-A874-5A6702F2B437}' />
     </window>
-    <window class='dashboard' name='Compare by Countries'>
+    <window class='dashboard' maximized='true' name='Compare by Countries'>
       <viewpoints>
         <viewpoint name='Compare Countries'>
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='8' />
+      <active id='-1' />
       <simple-id uuid='{E34F19BA-A35F-428D-B381-528475ABC101}' />
     </window>
     <window class='worksheet' hidden='true' name='Compare Countries'>
